@@ -1,0 +1,77 @@
+# .NET Core
+project.lock.json
+project.fragment.lock.json
+artifacts/
+
+# ASP.NET Scaffolding
+ScaffoldingReadMe.txt
+
+# StyleCop
+StyleCopReport.xml
+
+# User-specific files
+*.rsuser
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Auto-generated files
+*.dbmdl
+*.dbproj.schemaview
+*.jfm
+*_i.c
+*_p.c
+*_i.h
+*.ilk
+*.meta
+*.obj
+*.exe
+*.pdb
+*.ipch
+*.aps
+*.ncb
+*.opendb
+*.opensdf
+*.sdf
+*.cachefile
+*.generated.cs
+*.generated.ts
+*.dll
+*.pyc
+*.pyo
+*.log
+*.vspscc
+*.vssscc
+*.vspx
+*.vsmdi
+*.testsettings
+*.testresults
+*.sln.docstates
+
+# Build results
+[Dd]ebug/
+[Dd]ebugPublic/
+[Rr]elease/
+[Rr]eleases/
+x64/
+x86/
+[Aa][Rr][Mm]/
+[Aa][Rr][Mm]64/
+bld/
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+[Ll]ogs/
+
+# Publish results
+[Pp]ublish/
+[Pp]ublishProfiles/
+
+# Visual Studio
+.vscode/
+.vs/
+.suo
+*.user
+*.userosscache
+*.sln.docstates
