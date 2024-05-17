@@ -3,6 +3,7 @@ using NBA_API.Services;
 using System;
 using System.Collections.Generic;
 using ActionModel = NBA_API.Models.Action;
+using TP = NBA_API.Models.TopPerformer;
 
 namespace NBA_API.Controllers
 {
@@ -47,6 +48,18 @@ namespace NBA_API.Controllers
             if (result == null || result.Count == 0)
             {
                 return NotFound($"No actions found for player: {playerName}");
+            }
+
+            return Ok(result);
+        }
+
+          [HttpGet("GetTopPerformers")]
+        public ActionResult<List<TP>> GetTopPerformers()
+        {
+            var result = _nbaService.GetTopPerformers();
+            if (result == null || result.Count == 0)
+            {
+                return NotFound("No top performers found.");
             }
 
             return Ok(result);

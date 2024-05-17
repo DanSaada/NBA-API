@@ -14,5 +14,7 @@
         public string Description { get; set; }
         public string PlayerName {get; set;}
         public string PlayerNameI {get; set;}
+        public string ShotResult { get; set; }
+        public int AssistPersonId { get; set; }
     }
 }

@@ -68,6 +68,56 @@ namespace NBA_API.Services
             return result;
         }
 
+         public List<TopPerformer> GetTopPerformers()
+        {
+            var result = new Dictionary<string, TopPerformer>();
+
+            if (_gamesData == null || _gamesData.Game == null)
+            {
+                return result.Values.ToList();
+            }
+
+            var game = _gamesData.Game;
+
+            foreach (var action in game.Actions ?? new List<ActionModel>())
+            {
+                if (string.IsNullOrEmpty(action.PlayerNameI)) continue;
+
+                if (!result.ContainsKey(action.PlayerNameI))
+                {
+                    result[action.PlayerNameI] = new TopPerformer
+                    {
+                        PlayerName = action.PlayerNameI,
+                        Points = 0,
+                        Assists = 0,
+                        Rebounds = 0
+                    };
+                }
+
+                var performer = result[action.PlayerNameI];
+
+                switch (action.ActionType)
+                {
+                    case "3pt":
+                        if (action.ShotResult == "Made") performer.Points += 3;
+                        break;
+                    case "2pt":
+                        if (action.ShotResult == "Made") performer.Points += 2;
+                        break;
+                    case "freethrow":
+                        if (action.ShotResult == "Made") performer.Points += 1;
+                        break;
+                    case "assist":
+                        if (action.AssistPersonId != 0) performer.Assists += 1;
+                        break;
+                    case "rebound":
+                        performer.Rebounds += 1;
+                        break;
+                }
+            }
+
+            return result.Values.OrderByDescending(p => p.Points + p.Assists + p.Rebounds).ToList();
+        }
 
     }
 }
