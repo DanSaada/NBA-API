@@ -1,8 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
 using NBA_API.Services;
-using System;
-using System.Collections.Generic;
-using ActionModel = NBA_API.Models.Action;
 using TP = NBA_API.Models.TopPerformer;
 
 namespace NBA_API.Controllers
@@ -18,6 +15,7 @@ namespace NBA_API.Controllers
             _nbaService = nbaService;
         }
 
+        //Retrieves the names of all players, organized by team.
         [HttpGet("GetAllPlayersNames")]
         public ActionResult<Dictionary<string, List<string>>> GetAllPlayersNames()
         {
@@ -36,6 +34,7 @@ namespace NBA_API.Controllers
             }
         }
 
+        //Retrieves all action types performed by a specified player.
        [HttpGet("GetAllActionsByPlayerName")]
         public ActionResult<List<string>> GetAllActionsByPlayerName(string playerName)
         {
@@ -53,7 +52,8 @@ namespace NBA_API.Controllers
             return Ok(result);
         }
 
-          [HttpGet("GetTopPerformers")]
+        //Retrieves the top performers in the game based on points, assists, and rebounds.
+        [HttpGet("GetTopPerformers")]
         public ActionResult<List<TP>> GetTopPerformers()
         {
             var result = _nbaService.GetTopPerformers();

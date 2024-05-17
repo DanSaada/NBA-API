@@ -1,10 +1,5 @@
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 using NBA_API.Models;
 using NBA_API.Services;
-using System.Net.Http;
 using Newtonsoft.Json;
 
 using Microsoft.OpenApi.Models;

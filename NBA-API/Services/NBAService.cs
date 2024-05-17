@@ -1,6 +1,3 @@
-using System;
-using System.Collections.Generic;
-using Microsoft.Extensions.Logging;
 using NBA_API.Models;
 using ActionModel = NBA_API.Models.Action;
 
@@ -10,11 +7,12 @@ namespace NBA_API.Services
     {
         private readonly GamesData _gamesData;
 
-        public NBAService(GamesData gamesData, ILogger<NBAService> logger)
+        public NBAService(GamesData gamesData)
         {
             _gamesData = gamesData;
         }
 
+        //Retrieves the names of all players, organized by team.
         public Dictionary<string, List<string>> GetAllPlayersNames()
         {
             var result = new Dictionary<string, List<string>>();
@@ -45,6 +43,7 @@ namespace NBA_API.Services
             return result;
         }
 
+        // Retrieves all action types performed by a specified player.
         public List<string> GetAllActionTypesByPlayerName(string playerName)
         {
             var result = new List<string>();
@@ -68,6 +67,7 @@ namespace NBA_API.Services
             return result;
         }
 
+        //Retrieves the top performers in the game based on points, assists, and rebounds.
          public List<TopPerformer> GetTopPerformers()
         {
             var result = new Dictionary<string, TopPerformer>();
