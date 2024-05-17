@@ -12,6 +12,7 @@
         public int PersonId { get; set; }
         public string TeamTricode { get; set; }
         public string Description { get; set; }
+        public string PlayerName {get; set;}
         public string PlayerNameI {get; set;}
     }
 }

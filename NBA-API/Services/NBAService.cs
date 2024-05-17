@@ -44,5 +44,30 @@ namespace NBA_API.Services
 
             return result;
         }
+
+        public List<string> GetAllActionTypesByPlayerName(string playerName)
+        {
+            var result = new List<string>();
+
+            if (_gamesData == null || _gamesData.Game == null)
+            {
+                return result;
+            }
+
+            var game = _gamesData.Game;
+
+            foreach (var action in game.Actions ?? new List<ActionModel>())
+            {
+                if ((action.PlayerName != null && action.PlayerName.Equals(playerName, StringComparison.OrdinalIgnoreCase)) ||
+                    (action.PlayerNameI != null && action.PlayerNameI.Contains(playerName, StringComparison.OrdinalIgnoreCase)))
+                {
+                    result.Add(action.ActionType);
+                }
+            }
+
+            return result;
+        }
+
+
     }
 }

@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using NBA_API.Services;
 using System;
 using System.Collections.Generic;
+using ActionModel = NBA_API.Models.Action;
 
 namespace NBA_API.Controllers
 {
@@ -32,6 +33,23 @@ namespace NBA_API.Controllers
             {
                 return StatusCode(500, "Internal server error.");
             }
+        }
+
+       [HttpGet("GetAllActionsByPlayerName")]
+        public ActionResult<List<string>> GetAllActionsByPlayerName(string playerName)
+        {
+            if (string.IsNullOrEmpty(playerName))
+            {
+                return BadRequest("Player name is required.");
+            }
+
+            var result = _nbaService.GetAllActionTypesByPlayerName(playerName);
+            if (result == null || result.Count == 0)
+            {
+                return NotFound($"No actions found for player: {playerName}");
+            }
+
+            return Ok(result);
         }
     }
 }
