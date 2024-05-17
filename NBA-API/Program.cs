@@ -56,16 +56,7 @@ GamesData LoadGamesDataFromJson(string jsonUrl)
     using (var client = new HttpClient())
     {
         var json = client.GetStringAsync(jsonUrl).Result;
-        Console.WriteLine("Fetched JSON: " + json.Substring(0, 500)); // Log first 500 characters of JSON
         var gamesData = JsonConvert.DeserializeObject<GamesData>(json);
-        if (gamesData == null)
-        {
-            Console.WriteLine("Failed to deserialize JSON.");
-        }
-        else
-        {
-            Console.WriteLine("Successfully deserialized JSON.");
-        }
         return gamesData;
     }
 }

@@ -1,7 +1,8 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
+using Microsoft.Extensions.Logging;
 using NBA_API.Models;
+using ActionModel = NBA_API.Models.Action;
 
 namespace NBA_API.Services
 {
@@ -9,7 +10,7 @@ namespace NBA_API.Services
     {
         private readonly GamesData _gamesData;
 
-        public NBAService(GamesData gamesData)
+        public NBAService(GamesData gamesData, ILogger<NBAService> logger)
         {
             _gamesData = gamesData;
         }
@@ -18,20 +19,26 @@ namespace NBA_API.Services
         {
             var result = new Dictionary<string, List<string>>();
 
-            foreach (var game in _gamesData.Games)
+            if (_gamesData == null || _gamesData.Game == null)
             {
-                foreach (var team in game.Teams)
-                {
-                    var teamName = team.TeamTricode;
-                    if (!result.ContainsKey(teamName))
-                    {
-                        result[teamName] = new List<string>();
-                    }
+                return result;
+            }
 
-                    foreach (var player in team.Players)
-                    {
-                        result[teamName].Add(player.PlayerName);
-                    }
+            var game = _gamesData.Game;
+
+            foreach (var action in game.Actions ?? new List<ActionModel>())
+            {
+                var teamName = action.TeamTricode;
+                if (string.IsNullOrEmpty(teamName) || string.IsNullOrEmpty(action.PlayerNameI)) continue;
+
+                if (!result.ContainsKey(teamName))
+                {
+                    result[teamName] = new List<string>();
+                }
+
+                if (!result[teamName].Contains(action.PlayerNameI))
+                {
+                    result[teamName].Add(action.PlayerNameI);
                 }
             }
 
