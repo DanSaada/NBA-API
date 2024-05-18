@@ -57,6 +57,26 @@ $ dotnet build
  dotnet run --project NBA_API
 ```
 
+## Running Tests
+This project includes unit tests to ensure the reliability of the API. 
+The tests are written using the xUnit framework and are located in the NBA_API.Tests project.
+
+To run the tests, follow these steps:
+
+```bash
+# Navigate to the test project directory:
+$ $ cd NBA_API.Tests
+
+# Restore the test project dependencies:
+$ $ dotnet restore
+
+# Build the test project:
+$ dotnet build
+
+# Run the tests:
+$ dotnet test
+```
+
 
 ## Author
 - [Dan Saada](https://github.com/DanSaada)
